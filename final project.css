@@ -1,0 +1,167 @@
+*{
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+    font-family: Arial, Helvetica, sans-serif;
+    
+}
+body{
+    background-color: black;
+    min-height: 100vh;
+}
+#page1{
+    width: 100vw;
+    min-height: 100vh;
+    z-index: 99;
+    position: absolute;
+    top: 0;
+}
+
+a, button{
+    color: #ffffffe8;
+    font-weight: 500;
+    font-size: 16px;
+    text-decoration: none;
+}
+header{
+    background-color: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: rgb(0, 0, 0);
+    height: 10vh;
+    padding: 3.5vw 7vw;
+    position: absolute;
+    top: 0;
+    width: 100vw;
+}
+
+.logo{
+    cursor: pointer;
+    margin-top: 2.5vh;
+    border-radius: 5px;
+}
+
+nav{
+    width: 25vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+nav a{
+    transition: all 0.3s ease 0s;
+    color: rgba(255, 255, 255, 0.582);
+}
+nav a:hover{
+   color:  rgb(211, 100, 2);
+   font-weight: 600;
+   font-size: 20px;
+}
+
+button{
+    padding: 6px 12px;
+    background-color:  rgb(211, 100, 2);
+    border-radius: 10px;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+}
+#vid{
+    /* transform: rotate(180deg); */
+    position: fixed;
+}
+video {
+width: 100vw;
+height: 100vh;
+object-fit: cover;
+z-index: -99;
+}
+#mdl{
+    position: absolute;
+    top: 55vh;
+    right: 5vw;
+    background-color:  rgba(225, 165, 112, 0.057);
+    height: 78vh;
+    width: 36vw;
+    border: 1px solid rgba(255, 255, 255, 0.304);
+    border-radius: 15px;
+    backdrop-filter: blur(20px);
+}
+#mdl img{
+    position: absolute;
+    bottom: 1vh;
+    right: 0vw;
+    transform: rotate(25deg);
+    width: 25vw;
+}
+#qot{
+    width: 95%;
+    color: rgba(255, 255, 255, 0.582);
+    font-size: 22px;
+    padding-top: 20%;
+    padding-left: 30%;
+}
+#authr{
+    color: rgba(255, 255, 255, 0.582);
+    padding-left: 50%;
+    color: rgb(211, 100, 2);
+    font-weight: 600;
+}
+span{
+    color: rgb(211, 100, 2);
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    letter-spacing: 4px;
+}
+#cig{
+    position: absolute;
+    top: 68vh;
+    right: 11vw;
+    color: rgba(255, 255, 255, 0.788);
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-weight: 100;
+    width: 50%;
+    letter-spacing: 4px;
+    font-size: 78px;
+    transform: rotate(270deg);
+}
+#slogn{
+    height: 60vh;
+    width: 43vw;
+    font-size: 88px;
+    font-weight: 200;
+    letter-spacing: 2px;
+    top: 25vh;
+    left: 6.8vw;
+    color: rgba(255, 255, 255, 0.582);
+    position: absolute;
+}
+#slogn button {
+    width: 32%;
+    font-size: 24px;
+    font-weight: 100;
+    padding: 1.2vh 0;
+    border-radius: 25px;
+
+}
+#btn2 {
+    color: rgb(211, 100, 2);
+    background-color: white;
+    /* border: 2px solid rgb(211, 100, 2); */
+}
+#btn1 {
+    color: white;
+    /* border: 2px solid white; */
+}
+#tp {
+    position: absolute;
+    right: 13vw;
+    top: 28vh;
+    font-size: 28px;
+    color: rgba(255, 255, 255, 0.582);
+    /* background-color: red; */
+    text-align: center;
+}
+#sls {
+    margin-top: 2vh;
+}

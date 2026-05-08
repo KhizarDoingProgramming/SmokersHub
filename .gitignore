@@ -1,0 +1,42 @@
+# --- General OS files ---
+.DS_Store
+Thumbs.db
+*.log
+*.tmp
+
+# --- PHP specific ---
+vendor/
+composer.lock
+.env
+
+# --- Node / frontend assets (if any) ---
+node_modules/
+public/bundle.js
+
+# --- IDE / editor files ---
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# --- Media and large binaries (not needed in repo) ---
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.mp4
+*.mov
+*.webm
+*.avi
+*.svg
+
+# --- Docker files that can be regenerated or are environment specific ---
+*.env
+
+# --- Build artifacts ---
+*.zip
+*.tar.gz
+
+# --- Miscellaneous ---
+*.bak
+*.old

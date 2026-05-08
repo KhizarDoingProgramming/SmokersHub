@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smoker's Hub - Premium Smoking Accessories</title>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary:   #1a1a1a;
+            --secondary: #c41e3a;
+            --accent:    #ff6600;
+            --light:     #f5f5f5;
+            --dark:      #121212;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body { background: var(--dark); }
+
+        /* NAVBAR */
+        nav {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 0 60px;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(10,10,10,0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255,102,0,0.15);
+        }
+        .nav-logo img { height: 45px; }
+        .nav-links { display: flex; align-items: center; gap: 35px; list-style: none; }
+        .nav-links a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: color 0.25s;
+            position: relative;
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px; left: 0;
+            width: 0; height: 2px;
+            background: var(--accent);
+            transition: width 0.25s;
+        }
+        .nav-links a:hover { color: #fff; }
+        .nav-links a:hover::after { width: 100%; }
+        .nav-signin {
+            background: var(--accent) !important;
+            color: #000 !important;
+            padding: 9px 22px !important;
+            border-radius: 25px !important;
+            font-weight: 600 !important;
+        }
+        .nav-signin::after { display: none !important; }
+        .nav-signin:hover { background: #e05500 !important; color: #fff !important; }
+
+        /* HERO */
+        .hero { height: 100vh; display: flex; align-items: center; padding: 0 80px; position: relative; }
+        #vid { position: absolute; inset: 0; overflow: hidden; filter: blur(2px); }
+        video { width: 100%; height: 100%; object-fit: cover; }
+        .hero::before {
+            content: ''; position: absolute; inset: 0;
+            background: rgba(0,0,0,0.82); z-index: 0;
+        }
+        .hero-content { position: relative; z-index: 1; width: 55%; color: var(--light); }
+        .hero-content span {
+            font-size: 13px; font-weight: 600;
+            letter-spacing: 3px; color: var(--accent); text-transform: uppercase;
+        }
+        .hero-content h1 { font-size: 52px; font-weight: 700; line-height: 1.15; margin: 14px 0 20px; }
+        .hero-content p { font-size: 17px; color: rgba(255,255,255,0.65); margin-bottom: 36px; line-height: 1.7; max-width: 480px; }
+        .cta-btn {
+            display: inline-block; background: var(--accent); color: #000;
+            padding: 14px 32px; border-radius: 30px; text-decoration: none;
+            font-weight: 600; font-size: 15px; transition: 0.3s;
+        }
+        .cta-btn:hover { background: #e05500; color: #fff; transform: scale(1.05); }
+
+        /* PRODUCTS */
+        .products { padding: 100px 80px; background: #0a0a0a; }
+        .section-title { text-align: center; font-size: 34px; font-weight: 700; color: var(--light); margin-bottom: 10px; }
+        .section-sub { text-align: center; color: rgba(255,255,255,0.4); font-size: 13px; margin-bottom: 55px; letter-spacing: 2px; text-transform: uppercase; }
+        .product-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+        .product-card {
+            background: var(--primary); border-radius: 14px; overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.05); transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .product-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(255,102,0,0.12); }
+        .product-image { width: 100%; height: 220px; background-size: cover; background-position: center; }
+        .product-info { padding: 20px; }
+        .product-info h3 { color: var(--light); font-size: 16px; font-weight: 600; margin-bottom: 6px; }
+        .product-info p { color: rgba(255,255,255,0.45); font-size: 13px; margin-bottom: 14px; }
+        .price { color: var(--accent); font-weight: 700; font-size: 19px; }
+
+        /* ABOUT */
+        .about { padding: 100px 80px; background: var(--primary); position: relative; overflow: hidden; }
+        .about::before {
+            content: ''; position: absolute; top: -100px; right: -100px;
+            width: 500px; height: 500px;
+            background: radial-gradient(circle, rgba(255,102,0,0.07), transparent 70%);
+            pointer-events: none;
+        }
+        .about-content { display: flex; gap: 80px; align-items: center; position: relative; }
+        .about-text { flex: 1; }
+        .about-text h2 { font-size: 36px; font-weight: 700; color: var(--light); margin-bottom: 24px; }
+        .about-text p { color: rgba(255,255,255,0.55); line-height: 1.85; margin-bottom: 18px; font-size: 15px; }
+        .about-image { flex: 1; display: flex; justify-content: center; opacity: 0.7; }
+
+        /* BLOG */
+        .blog { padding: 100px 80px; background: #0a0a0a; }
+        .blog-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px; margin-top: 55px; }
+        .blog-card {
+            background: var(--primary); border-radius: 14px; overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.05); transition: transform 0.3s;
+        }
+        .blog-card:hover { transform: translateY(-5px); }
+        .blog-image { height: 200px; background-size: cover; background-position: center; }
+        .blog-content { padding: 22px; }
+        .blog-content h3 { color: var(--light); font-size: 17px; margin-bottom: 10px; }
+        .blog-content p { color: rgba(255,255,255,0.45); line-height: 1.65; font-size: 14px; }
+        .read-more { display: inline-block; color: var(--accent); text-decoration: none; margin-top: 14px; font-size: 13px; font-weight: 600; }
+        .read-more:hover { color: #e05500; }
+
+        /* CONTACT */
+        .contact { padding: 100px 80px; background: var(--primary); }
+        .form-container { max-width: 580px; margin: 0 auto; }
+        .form-group { margin-bottom: 18px; }
+        .form-group label { display: block; color: rgba(255,255,255,0.55); font-size: 13px; margin-bottom: 6px; }
+        input, textarea {
+            width: 100%; padding: 12px 16px;
+            background: #0d0d0d; border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 8px; color: var(--light); font-size: 14px;
+            font-family: 'Poppins', sans-serif; transition: border-color 0.2s;
+        }
+        input:focus, textarea:focus { outline: none; border-color: var(--accent); }
+        textarea { resize: vertical; }
+        .submit-btn {
+            background: var(--accent); color: #000; border: none;
+            padding: 13px 32px; border-radius: 30px; font-size: 15px;
+            font-weight: 600; cursor: pointer; transition: 0.3s;
+            font-family: 'Poppins', sans-serif;
+        }
+        .submit-btn:hover { background: #e05500; color: #fff; transform: scale(1.04); }
+        .submit-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+        /* FOOTER */
+        footer {
+            background: #080808; text-align: center; padding: 24px;
+            color: rgba(255,255,255,0.3); font-size: 13px;
+            border-top: 1px solid rgba(255,102,0,0.1);
+        }
+        footer span { color: var(--accent); }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html" class="nav-logo">
+            <img src="Screenshot_2024-12-29_111501-removebg-preview.png" alt="Smoker's Hub">
+        </a>
+        <ul class="nav-links">
+            <li><a href="product.html">Products</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#blog">Blog</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><a href="form.html" class="nav-signin" id="signInLink">Sign In</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero">
+        <div id="vid">
+            <video src="vecteezy_glowing-looping-world-no-tobacco-day-thank-you-message-with_47921412.mp4" autoplay muted loop></video>
+        </div>
+        <div class="hero-content" data-aos="fade-right">
+            <span>Premium Collection</span>
+            <h1>Welcome to<br>Smoker's Hub</h1>
+            <p>Discover premium smoking accessories and elevate your experience with our carefully curated collection.</p>
+            <a href="product.html" class="cta-btn">Explore Products</a>
+        </div>
+    </section>
+
+    <section class="products">
+        <h2 class="section-title" data-aos="fade-up">Featured Products</h2>
+        <p class="section-sub" data-aos="fade-up">Handpicked for quality</p>
+        <div class="product-grid">
+            <div class="product-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="product-image" style="background-image:url('https://images.unsplash.com/photo-1543750747-927e0e817a89?w=600&auto=format&fit=crop&q=60')"></div>
+                <div class="product-info">
+                    <h3>Premium Lighter</h3>
+                    <p>Elegant design with reliable performance</p>
+                    <span class="price">$19.99</span>
+                </div>
+            </div>
+            <div class="product-card" data-aos="fade-up" data-aos-delay="150">
+                <div class="product-image" style="background-image:url('https://images.unsplash.com/photo-1536819114556-1e10f967fb61?w=600&auto=format&fit=crop&q=60')"></div>
+                <div class="product-info">
+                    <h3>Premium Cannabis Flower</h3>
+                    <p>Hand-selected strains, rich flavors</p>
+                    <span class="price">$119.99</span>
+                </div>
+            </div>
+            <div class="product-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="product-image" style="background-image:url('https://images.unsplash.com/photo-1514514589924-94eda1732498?w=600&auto=format&fit=crop&q=60')"></div>
+                <div class="product-info">
+                    <h3>Premium Cigars</h3>
+                    <p>Finest tobacco, smooth experience</p>
+                    <span class="price">$49.99</span>
+                </div>
+            </div>
+            <div class="product-card" data-aos="fade-up" data-aos-delay="250">
+                <div class="product-image" style="background-image:url('https://media.istockphoto.com/id/534265881/photo/casino.webp?a=1&b=1&s=612x612&w=0&k=20&c=vYSjuzCKP7rHRTMFYFZJgPqEJC7_J-HdKKf_FCUqn2g=')"></div>
+                <div class="product-info">
+                    <h3>Smoker's Accessories</h3>
+                    <p>Complete your premium setup</p>
+                    <span class="price">$59.99</span>
+                </div>
+            </div>
+            <div class="product-card" data-aos="fade-up" data-aos-delay="300">
+                <div class="product-image" style="background-image:url('https://images.openai.com/static-rsc-4/RbNVQcKBjIxvwlNKmbQrhuKTmrgS8VsxZZkdXBljGYkpE9t1C8nDKKQX-ihVCUvGP3759n3OISUCCGOyiekxexzWu3D_D3799BmChUaowCqZ-AGbiNMFrpr2zJQoy5CH5eopSbqNZng6d9bMeh9X-XEWDn5U3bX6sJ802ebFcw43mRND7_L4Uk7A7oJoypjV?purpose=fullsize')"></div>
+                <div class="product-info">
+                    <h3>Cigar Wood Clippers</h3>
+                    <p>Authentic smoky flavor</p>
+                    <span class="price">$29.99</span>
+                </div>
+            </div>
+            <div class="product-card" data-aos="fade-up" data-aos-delay="350">
+                <div class="product-image" style="background-image:url('https://images.openai.com/static-rsc-4/T2vSn7912pkCotob2ZT9BdpZTzjHhef_dT-cTVzQ2mZN41Ug7w3mEnfFb8CoxZC5-uwSHelwW81S34CbAZv096OBcWMoNK6I2TQGb3Y9u5HErTB8xF7lZa-x_hstWtsbzKW3o4yZ_vW3-5bmsfvldIgcfnWSGRJm4sPzOl5yjCgdUbQpqQnZwgQClLwd6AFR?purpose=fullsize')"></div>
+                <div class="product-info">
+                    <h3>Premium Vaping Device</h3>
+                    <p>Smooth flavor, sleek design</p>
+                    <span class="price">$39.99</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="about" id="about">
+        <div class="about-content" data-aos="fade-up">
+            <div class="about-text">
+                <h2>About Smoker's Hub</h2>
+                <p>Since 2024, Smoker's Hub has been the premier destination for premium smoking accessories. We pride ourselves on offering only the highest quality products, backed by exceptional customer service.</p>
+                <p>Our expertly curated collection features everything from classic pieces to modern innovations, ensuring every customer finds exactly what they're looking for.</p>
+                <a href="product.html" class="cta-btn" style="margin-top:10px;">Shop Now</a>
+            </div>
+            <div class="about-image" data-aos="fade-left">
+                <svg width="380" height="380" viewBox="0 0 400 400">
+                    <circle cx="200" cy="200" r="150" fill="none" stroke="rgba(255,102,0,0.3)" stroke-width="1"/>
+                    <circle cx="200" cy="200" r="100" fill="none" stroke="rgba(255,102,0,0.15)" stroke-width="1"/>
+                    <path d="M100,200 Q200,100 300,200" fill="none" stroke="#ff6600" stroke-width="2" opacity="0.6">
+                        <animate attributeName="d" dur="4s" repeatCount="indefinite"
+                            values="M100,200 Q200,100 300,200;M100,200 Q200,300 300,200;M100,200 Q200,100 300,200"/>
+                    </path>
+                </svg>
+            </div>
+        </div>
+    </section>
+
+    <section class="blog" id="blog">
+        <h2 class="section-title" data-aos="fade-up">Latest From Our Blog</h2>
+        <p class="section-sub" data-aos="fade-up">Tips, guides & news</p>
+        <div class="blog-grid">
+            <div class="blog-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="blog-image" style="background-image:url('https://images.unsplash.com/photo-1514514589924-94eda1732498?w=600&auto=format&fit=crop&q=60')"></div>
+                <div class="blog-content">
+                    <h3>The Art of Collection</h3>
+                    <p>Discover the joy of building your perfect collection of premium accessories and what to look for when starting out.</p>
+                    <a href="#" class="read-more">Read More →</a>
+                </div>
+            </div>
+            <div class="blog-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="blog-image" style="background-image:url('https://media.istockphoto.com/id/538673860/photo/electronic-cigaretts-device-box-mod-to-smokeless-smoking-3d-rend.jpg?s=612x612')"></div>
+                <div class="blog-content">
+                    <h3>Maintenance Guide</h3>
+                    <p>Learn how to properly maintain and care for your premium accessories to ensure they last for years to come.</p>
+                    <a href="#" class="read-more">Read More →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact" id="contact">
+        <div class="form-container" data-aos="fade-up">
+            <h2 class="section-title" style="text-align:left; margin-bottom:8px;">Get in Touch</h2>
+            <p style="color:rgba(255,255,255,0.4); font-size:14px; margin-bottom:36px;">We'd love to hear from you</p>
+            <form id="contactForm">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" placeholder="Your name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" placeholder="your@email.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" rows="5" placeholder="How can we help?" required></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 <span>Smoker's Hub</span> .co — All Rights Reserved.</p>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 900, once: false, mirror: true });
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        document.getElementById('contactForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const btn     = this.querySelector('button[type="submit"]');
+            const name    = document.getElementById('name').value.trim();
+            const email   = document.getElementById('email').value.trim();
+            const message = document.getElementById('message').value.trim();
+            btn.disabled = true; btn.textContent = 'Sending…';
+            try {
+                const res  = await fetch('php/contact.php', {
+                    method: 'POST', headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, email, message }),
+                });
+                const json = await res.json();
+                alert(json.message);
+                if (json.success) this.reset();
+            } catch { alert('Could not send message. Please try again.'); }
+            finally { btn.disabled = false; btn.textContent = 'Send Message'; }
+        });
+
+        (async () => {
+            try {
+                const res  = await fetch('php/auth.php', {
+                    method: 'POST', headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ action: 'me' }),
+                });
+                const json = await res.json();
+                if (json.success) {
+                    const link = document.getElementById('signInLink');
+                    link.textContent = '👤 ' + json.user.name;
+                    link.href = '#';
+                    link.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        if (!confirm('Do you want to log out?')) return;
+                        fetch('php/auth.php', {
+                            method: 'POST', headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ action: 'logout' }),
+                        }).then(() => location.reload());
+                    });
+                }
+            } catch {}
+        })();
+    </script>
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smoker's Hub - Sign In</title>
+    <link rel="stylesheet" href="form.css">
+    <style>
+        .error-msg {
+            background: rgba(244, 67, 54, 0.15);
+            color: #f44336;
+            border: 1px solid rgba(244, 67, 54, 0.3);
+            border-radius: 8px;
+            padding: 10px 14px;
+            font-size: 13px;
+            margin-bottom: 10px;
+            display: none;
+        }
+        .success-msg {
+            background: rgba(76, 175, 80, 0.15);
+            color: #4caf50;
+            border: 1px solid rgba(76, 175, 80, 0.3);
+            border-radius: 8px;
+            padding: 10px 14px;
+            font-size: 13px;
+            margin-bottom: 10px;
+            display: none;
+        }
+        .btn:disabled { opacity: 0.6; cursor: not-allowed; }
+    </style>
+</head>
+<body>
+    <div id="vid">
+        <video src="vecteezy_black-and-white-smoke_2016927.mov" autoplay muted loop></video>
+    </div>
+
+    <div class="warper">
+        <form id="loginForm">
+            <h1>Sign In</h1>
+
+            <div id="errorMsg"   class="error-msg"></div>
+            <div id="successMsg" class="success-msg"></div>
+
+            <div class="input-box">
+                <input type="email" id="email" placeholder="Email" required>
+                <i class='bx bxs-user'></i>
+            </div>
+            <div class="input-box">
+                <input type="password" id="password" placeholder="Password" required maxlength="20" minlength="3">
+                <i class='bx bxs-lock-alt'></i>
+            </div>
+            <div class="remember-forget">
+                <label><input type="checkbox"> Remember me</label>
+                <a href="#">Forgot Password?</a>
+            </div>
+            <button type="submit" class="btn" id="loginBtn">Login</button>
+            <div class="register-link">
+                <p>Don't have an account? <a href="registration_form.html">Register</a></p>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const btn       = document.getElementById('loginBtn');
+            const errorDiv  = document.getElementById('errorMsg');
+            const succDiv   = document.getElementById('successMsg');
+            const email     = document.getElementById('email').value.trim();
+            const password  = document.getElementById('password').value;
+
+            errorDiv.style.display = 'none';
+            succDiv.style.display  = 'none';
+
+            if (!email || !password) {
+                errorDiv.textContent   = 'Please fill in all fields.';
+                errorDiv.style.display = 'block';
+                return;
+            }
+
+            btn.disabled    = true;
+            btn.textContent = 'Signing in…';
+
+            try {
+                const res  = await fetch('php/auth.php', {
+                    method:  'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body:    JSON.stringify({ action: 'login', email, password }),
+                });
+                const json = await res.json();
+
+                if (json.success) {
+                    succDiv.textContent   = 'Welcome back, ' + json.user.name + '! Redirecting…';
+                    succDiv.style.display = 'block';
+                    setTimeout(() => window.location.href = 'index.html', 1500);
+                } else {
+                    errorDiv.textContent   = json.message;
+                    errorDiv.style.display = 'block';
+                }
+            } catch (err) {
+                errorDiv.textContent   = 'Could not connect to server. Please try again.';
+                errorDiv.style.display = 'block';
+            } finally {
+                btn.disabled    = false;
+                btn.textContent = 'Login';
+            }
+        });
+    </script>
+</body>
+</html>
